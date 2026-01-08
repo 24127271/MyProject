@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<head>
+    <title>Thư mời Tốt nghiệp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<div id="avatar-modal" onclick="this.style.display='none'" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; cursor:zoom-out; align-items:center; justify-content:center;">
+    <img id="img-hd" style="max-width:90%; max-height:90%; border: 3px solid white; border-radius: 10px;">
+</div>
+
+<body>
+    <div id="envelope-overlay" onclick="openLetter()">
+        <div class="envelope-container">
+            <img src="{{ url_for('static', filename='images/envelope-bg.png') }}" class="envelope-img">
+            <div class="btn-open">🎓</div>
+            <p class="guide-text">Chạm để mở thiệp</p>
+        </div>
+    </div>
+
+    <div id="main-content" style="display:none;">
+        <section class="bento-header">
+            <div class="profile-card">
+                <img src="{{ url_for('static', filename='images/profile.jpg') }}" 
+                    class="avatar"
+                    onclick="viewHD(this.src)">
+                <h1 class="name">Thien Nhu's Graduation Ceremony</h1>
+                <p class="greeting">Thân chào bạn! 👋</p>
+                <div class="about-text">
+                    <p>Nhân ngày mình tốt nghiệp cử nhân Trường Đại học Kinh tế - Luật (UEL)</p>
+                    <p>Đến chung vui cùng mình nha ❤️</p>
+                </div>
+                <div class="header-buttons">
+                    <a href="#invitation" class="btn primary">Lời Mời</a>
+                    <a href="/guestbook" class="btn secondary">Lời Yêu Thương</a>
+                </div>
+            </div>
+        </section> 
+
+        <section class="bento-grid" id="invitation">
+            <div class="card wish-card" id="guestbook">
+                <div class="left-column">
+                    <div class="card wish-card small-wish">
+                        <h3>💙 Gửi lời chúc</h3>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p style="color: #ffeb3b; font-weight: bold; text-align: center; margin-bottom: 10px;">
+                                        {{ message }}
+                                    </p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <form method="POST">
+                            <textarea name="content" placeholder="Chúc mừng tốt nghiệp..."></textarea>
+                            <div class="input-group-compact">
+                                <input type="text" name="name" placeholder="Tên bạn">
+                                <button type="submit" class="btn-send-small">🚀 Gửi</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card about-me-card">
+                        <h3>👨‍🎓 Về mình</h3>
+                        <p>Mình đã hoàn thành chương trình học tại Trường Đại Học Kinh Tế - Luật - ĐHQG TP HCM, với chuyên ngành Quản Lý Công. Hành trình 4 năm tại UEL là những kỷ niệm vô giá về tình bạn, sự trưởng thành và những bài học quý báu. Cảm ơn mọi người đã luôn đồng hành cùng mình!</p>
+                        <div class="achievements">
+                            <span>🎓 Cử nhân Kinh Tế</span>
+                            <span>📍 Khóa 2022 - 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="card info-card">
+                    <div class="icon">🏛️</div>
+                    <h4>Lễ Tốt Nghiệp</h4>
+                    <p>20/05/2026</p>
+                    <p class="time">08:00 Sáng</p>
+                </div>
+                <div class="card info-card">
+                    <div class="icon">📍</div>
+                    <h4>Địa điểm</h4>
+                    <p>Hội trường lớn - UEL</p>
+                    <p class="link">Xem bản đồ</p>
+                </div>
+                <div class="card social-card">
+                    <h4>Kết nối với mình nhé! 🌐</h4>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/lethiennhu03" target="_blank" class="social-item">
+                        <i class="fab fa-facebook-f fb-color"></i>
+                        <p>Facebook</p>
+                </a>
+                <a href="https://www.instagram.com/elwjeeb_/" target="_blank" class="social-item">
+                    <i class="fab fa-instagram ins-color"></i>
+                    <p>Instagram</p>
+                </a>
+                </div>
+                <p class="social-note">nhắn tin cho mình nhé</p>
+            </div>
+            
+        </section>
+    </div>
+
+    <script>
+        function openLetter() {
+            document.getElementById('envelope-overlay').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <div class="back-to-envelope">
+        <a href="/">🏠 Xem lại thiệp bìa</a>
+    </div>
+
+    
+</body>
+</html>

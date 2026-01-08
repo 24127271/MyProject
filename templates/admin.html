@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý lời chúc</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body style="background: #f4f4f4; padding: 40px;">
+    <div style="max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 15px; shadow: var(--shadow);">
+        <h2 style="color: var(--primary-red); text-align: center;">Quản lý Lời chúc</h2>
+        
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr style="background: #eee;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Người gửi</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Nội dung</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for wish in wishes %}
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ wish.name }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ wish.content }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                        <a href="/delete/{{ wish.id }}" 
+                           onclick="return confirm('Bạn có chắc muốn xóa lời chúc này?')" 
+                           style="color: red; text-decoration: none; font-weight: bold;">Xóa</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="/" style="text-decoration: none; color: #666;">← Quay lại trang chủ</a>
+        </div>
+
+        <div style="text-align: right; margin-bottom: 10px;">
+            <a href="/admin/logout" style="color: #666; font-size: 0.9rem;">Đăng xuất [X]</a>
+        </div>
+    </div>
+</body>
+</html>

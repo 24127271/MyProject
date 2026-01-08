@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sổ Lưu Bút - Tốt Nghiệp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: #8b0000; padding: 20px;"> <div class="guestbook-container">
+        <h1 style="color: white; text-align: center;">💝 NoteBook</h1>
+        <p style="color: #ffcccc; text-align: center;">Cảm ơn những lời chúc tốt đẹp từ mọi người!</p>
+        
+        <div class="wishes-grid">
+            {% for wish in wishes %}
+            <div class="wish-item">
+                <p class="wish-content">"{{ wish.content }}"</p>
+                <p class="wish-author">- <strong>{{ wish.name }}</strong></p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/?open=true" class="btn-back">⬅ Quay lại trang chủ</a>
+        </div>
+    </div>
+</body>
+</html>

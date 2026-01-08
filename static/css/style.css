@@ -1,0 +1,545 @@
+/* 1. ĐỊNH DẠNG CHUNG & BIẾN MÀU (Đỏ đô UEL) */
+:root {
+    --primary-red: #8b0000;    /* Màu đỏ đô UEL */
+    --gold-accent: #facc15;    /* Màu vàng nhấn */
+    --soft-white: #fdfaf6;
+    --card-bg: #ffffff;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Inter', -apple-system, sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* 2. LỚP PHỦ PHONG THƯ (Giữ nguyên các phần bạn đã hoàn thiện) */
+#envelope-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('/static/images/uel.jpg'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    cursor: pointer;
+    transition: all 0.8s ease;
+}
+
+.envelope-container {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.envelope-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+}
+
+.btn-open {
+    position: absolute;
+    top: 55%; /* Điểm bạn đã chỉnh khớp */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--primary-red);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    border: 3px solid white;
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.8);
+    z-index: 2;
+}
+
+.guide-text {
+    position: absolute;
+    bottom: -60px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+/* 3. HIỆU ỨNG CHUYỂN ĐỘNG */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-out {
+    opacity: 0;
+    transform: scale(1.1);
+    filter: blur(10px);
+}
+
+/* 4. TRANG CHỦ BENTO STYLE (Nâng cấp từ About Me & Profile của bạn) */
+#main-content {
+    background-color: var(--primary-red); /* Nền đỏ đô đồng bộ */
+    min-height: 100vh;
+    padding: 20px 15px;
+}
+
+/* Khối Header Profile của bạn */
+.profile-card {
+    background: var(--card-bg);
+    border-radius: 32px;
+    padding: 50px 30px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 0.8s ease;
+}
+
+.name {
+    color: var(--primary-red);
+    font-size: 2.2rem !important;      /* Chữ tên rất to và nổi bật */
+    font-weight: 800;
+    margin: 15px 0 5px;
+    display: block;                  /* Đảm bảo nó luôn nằm một dòng riêng */
+}
+
+.greeting {
+    color: #b45309; 
+    font-weight: 700;
+    font-size: 1.2rem !important;    /* Lời chào to rõ */
+    margin-bottom: 15px;
+    display: block;
+}
+
+.about-text p {
+    font-size: 1.1rem !important;    /* Chữ giới thiệu dễ đọc */
+    line-height: 1.6;
+    color: #444;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.header-buttons {
+    margin-top: 30px;
+}
+
+.header-buttons .btn {
+    padding: 18px 40px !important;   /* Nút bấm to, dễ chạm */
+    font-size: 1.3rem !important;
+    border-radius: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+}
+
+.avatar {
+    width: 220px !important;   /* Độ rộng cố định */
+    height: 280px !important;  /* Độ cao cố định */
+    object-fit: cover;         /* Giữ ảnh không bị méo */
+    border-radius: 25px;       /* Bo góc nhẹ cho hiện đại */
+    border: 4px solid #f8f1f1;
+    display: block;
+    margin: 0 auto 15px;       /* Căn giữa và tạo khoảng cách với tên */
+    max-width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.avatar {
+    transition: all 0.3s ease; /* Tạo chuyển động mượt */
+    cursor: zoom-in;           /* Hiển thị con trỏ kính lúp khi rên vào */
+}
+
+.avatar:hover {
+    transform: scale(1.05) translateY(-5px); /* Phóng to nhẹ và nhích lên */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);   /* Đổ bóng sâu hơn */
+    filter: brightness(1.1);                  /* Làm ảnh sáng hơn chút */
+}
+
+.profile-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.name-title {
+    color: var(--primary-red);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 15px 0 5px;
+}
+
+/* Hệ thống Grid kiểu Bento (Chia các card như ảnh mẫu) */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 15px;
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+/* Phần lời chúc của bạn */
+.wish-card h3 {
+    color: var(--primary-red);
+    margin-top: 0;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+textarea {
+    width: 100%;
+    max-width: 400px;
+    height: 80px;
+    border: 1px solid #eee;
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 12px;
+    font-family: inherit;
+    resize: none;
+    margin: 0 auto;
+    display: block;
+}
+
+.btn-send {
+    background: var(--primary-red);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Phần thông tin lịch trình (Right Column) */
+.right-column {
+    display: grid;
+    gap: 15px;
+}
+
+.info-card {
+    text-align: center;
+}
+
+.info-card h4 {
+    font-size: 1.4rem !important; /* Tăng kích thước tiêu đề thẻ */
+    color: var(--primary-red);
+    margin-bottom: 8px;
+    margin: 10px;
+    font-weight: 700;
+}
+
+/* Phóng to nội dung chi tiết bên dưới tiêu đề */
+.info-card p {
+    font-size: 1.1rem !important; /* Khớp với font-size của .about-me-card p */
+    line-height: 1.6;
+    color: #555;      /* Màu xám nhẹ giống About Me */
+    font-weight: 400; /* Không để đậm để giống văn bản nội dung */
+    margin: 0;
+}
+
+/* 5. RESPONSIVE */
+@media (max-width: 768px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+    .envelope-container {
+        max-width: 320px;
+    }
+    .btn-open {
+        width: 50px; height: 50px; font-size: 24px;
+    }
+}
+
+.social-card {
+    /* Tăng khoảng cách đệm phía trên */
+    padding-top: 40px !important; 
+    
+    /* Đảm bảo nội dung vẫn căn giữa */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.social-card h4 {
+    color: var(--primary-red); /* Sử dụng màu đỏ đô UEL */
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+
+    margin-top: -15px !important; 
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.social-item {
+    text-decoration: none;
+    color: #444;
+    transition: transform 0.3s ease;
+    flex: 1;
+}
+
+.social-item:hover {
+    transform: translateY(-5px); /* Hiệu ứng nổi lên khi di chuột vào */
+}
+
+.social-item .icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.social-item p {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Màu sắc đặc trưng cho từng logo */
+.social-icons i {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.fb-color { color: #1877F2; }      /* Xanh Facebook */
+.ins-color {                       /* Màu Instagram gradient */
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hiệu ứng khi rê chuột vào */
+.social-item:hover i {
+    transform: scale(1.2);
+    transition: 0.3s;
+}
+
+/* Thu nhỏ khối gửi lời chúc */
+.small-wish {
+    padding: 15px !important;
+    margin-bottom: 15px;
+}
+
+.small-wish textarea {
+    height: 60px !important; /* Thu hẹp chiều cao ô nhập */
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.input-group-compact {
+    display: flex;
+    gap: 8px;
+}
+
+.input-group-compact input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.btn-send-small {
+    background: var(--primary-red);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Ẩn danh sách lời chúc cũ (vì sẽ hiện ở trang riêng) */
+.wish-display {
+    display: none;
+}
+
+/* Style cho khối About Me mới */
+.about-me-card {
+    border-left: 5px solid var(--primary-red); /* Tạo điểm nhấn màu đỏ đô */
+    text-align: left;
+}
+
+.about-me-card h3 {
+    color: var(--primary-red);
+    margin-top: 0;
+}
+
+.about-me-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+.achievements {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.achievements span {
+    font-size: 0.85rem !important; /* Làm các nhãn như "Lễ tốt nghiệp", "Cử nhân" to hơn */
+    padding: 4px 12px !important; /* Tăng khoảng cách đệm để nhãn trông cân đối */
+    background: #fff5f5;
+    color: var(--primary-red);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.about-me-card h3 {
+    font-size: 1.8rem !important; /* Tiêu đề "Về mình" hoặc "Lễ tốt nghiệp" */
+}
+
+.guestbook-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.wishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.wish-item {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    border-bottom: 5px solid #facc15; /* Gạch chân màu vàng nhấn */
+}
+
+.wish-content {
+    font-style: italic;
+    color: #444;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.wish-author {
+    text-align: right;
+    color: #8b0000;
+    margin-top: 15px;
+}
+
+.btn-back {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    display: inline-block;
+}
+
+.alert-msg {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid #c3e6cb;
+    animation: fadeInUp 0.5s ease;
+}
+.back-to-envelope {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.back-to-envelope a {
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--primary-red);
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.back-to-envelope a:hover {
+    background: var(--primary-red);
+    color: white;
+}
+
+/* Hiệu ứng cho tất cả các thẻ có class .card */
+.card {
+    transition: all 0.3s ease; /* Giúp chuyển động mượt mà trong 0.3 giây */
+    cursor: pointer; /* Biến con trỏ thành hình bàn tay */
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Đẩy thẻ lên trên 10px */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Làm bóng đổ đậm và rộng hơn */
+    border-color: var(--primary-red); /* Có thể làm viền đổi màu nhẹ nếu muốn */
+}
+
+.btn-send-small {
+    transition: all 0.2s ease;
+}
+
+.btn-send-small:hover {
+    background-color: #a00000; /* Đổi màu đỏ đậm hơn một chút */
+    transform: scale(1.05); /* Phóng to nhẹ nút bấm */
+    filter: brightness(1.1); /* Làm nút sáng lên một chút */
+}
+.social-note {
+    margin-top: 25px;           /* Khoảng cách với các icon phía trên */
+    font-size: 0.95rem;         /* Kích thước chữ vừa phải */
+    color: #666;                /* Màu xám nhẹ cho tinh tế */
+    font-style: italic;         /* Chữ in nghiêng cho thân thiện */
+    text-align: center;         /* Căn giữa dòng chữ */
+    font-weight: 400;
+}
+
+/* Nếu bạn muốn khi di chuột vào cả thẻ Card thì dòng chữ này đậm lên */
+.social-card:hover .social-note {
+    color: var(--primary-red);
+    transition: color 0.3s ease;
+}
